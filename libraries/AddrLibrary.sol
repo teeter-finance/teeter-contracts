@@ -3,7 +3,6 @@ pragma solidity ^0.5.6;
 
 library AddrLibrary {
 
-    // calculates the CREATE2 address for a pair without making any external calls
     function underlyingFor(
         address factory,
         address tokenA,

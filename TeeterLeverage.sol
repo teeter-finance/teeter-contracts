@@ -25,21 +25,14 @@ contract TeeterLeverage is ITeeterLeverage, TeeterERC20 {
     }   
     
     constructor() public {
-        //factory address == the address of user who imp the contract. msg.sender == address of factory
         factory = msg.sender;
     }
 
     function initialize(address _underlying) external {
-        //确认调用者为工厂地址
         require(msg.sender == factory, "Teeter: FORBIDDEN");
-        //token0 = _token0;
-        //initLever = _lever;
-        //direction = _direction;
         underlying = _underlying;
-        //symbol =  TeeterLibrary.strMulJoin('x', IERC20(token0).symbol());
         symbol = 'xTeeter';
         name = symbol;
-        //name = TeeterLibrary.strMulJoin('Teeter_', IERC20(token0).symbol(), '_', IERC20(addrBase).symbol(), '_3L');
     }
 
     function mint(address to, uint256 value)external lock {

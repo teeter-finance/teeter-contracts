@@ -28,12 +28,8 @@ library UniswapV2OracleLibrary {
         ));
         
         if (blockTimestamp > blockTimestampLast) {
-            // subtraction overflow is desired
             uint32 timeElapsed = uint32(SafeMath.sub(blockTimestamp, blockTimestampLast));
-            // addition overflow is desired
-            // counterfactual
             require((reserve0 > 0) && (reserve1 > 0), "DIV_BY_ZERO");
-            //price0Cumulative += uint(FixedPoint.fraction(reserve1, reserve0)._x) * timeElapsed;
             price0Cumulative += SafeMath.div(
                 SafeMath.mul(
                     (uint(reserve1)<<112), 
@@ -41,8 +37,6 @@ library UniswapV2OracleLibrary {
                 ), 
                 reserve0
             );
-            // counterfactual
-            //price1Cumulative += uint(FixedPoint.fraction(reserve0, reserve1;)._x) * timeElapsed;
             price1Cumulative += SafeMath.div(
                 SafeMath.mul(
                     (uint(reserve0)<<112), 
